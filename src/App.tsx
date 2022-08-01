@@ -1,6 +1,14 @@
 import { useState } from 'react';
+import { Inclusao } from './components/Inclusao';
+import { Item } from './types/Item';
 
 function App() {
+  const [itens, setItens] = useState<Item[]>([]);
+
+  const handlerSave = (newItem: Item) => {
+    setItens([...itens, newItem]);
+  };
+
   return (
     <div
       id="container"
@@ -9,23 +17,9 @@ function App() {
       <p className="text-2xl italic font-bold">Gerenciador Financeiro</p>
 
       <div id="formulario" className="w-full border p-5">
-        <div className="flex flex-col">
-          <div className="w-full ">
-            <div className="flex">
-              <div className="basis-2/4 border  border-gray-800">01</div>
-              <div className="mx-2 basis-1/4 border border-gray-800">02</div>
-              <div className="basis-1/4 border border-gray-800">03</div>
-            </div>
-          </div>
-          <div className="mt-2 w-full">
-            <div className="flex items-center justify-center">
-              <button className="w-full border border-gray-800 bg-pink-400 font-bold text-gray-900">
-                Incluir
-              </button>
-            </div>
-          </div>
-        </div>
+        <Inclusao saveMethod={handlerSave}></Inclusao>
       </div>
+
       <div id="contadores" className="my-5 w-full border p-5">
         <div className="flex justify-between">
           <div className="font-bold">Receitas: R$ 0,00</div>
