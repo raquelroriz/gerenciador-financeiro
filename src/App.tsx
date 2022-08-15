@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Inclusao } from './components/Inclusao';
 import { Item } from './types/Item';
+import { Carteira } from './components/Carteira';
+import React from 'react';
 
 function App() {
   const [itens, setItens] = useState<Item[]>([]);
-
+  // itens é o meu banco de dados array
   const handlerSave = (newItem: Item) => {
     setItens([...itens, newItem]);
   };
@@ -21,11 +23,7 @@ function App() {
       </div>
 
       <div id="contadores" className="my-5 w-full border p-5">
-        <div className="flex justify-between">
-          <div className="font-bold">Receitas: R$ 0,00</div>
-          <div className="font-bold">Despesas: R$ 0,00</div>
-          <div className="font-bold">Total: R$ 0,00</div>
-        </div>
+        <Carteira lancamentos={itens}></Carteira>
       </div>
 
       <div id="listagem" className="w-full border">
