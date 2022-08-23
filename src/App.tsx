@@ -11,12 +11,36 @@ function App() {
   // itens é o meu banco de dados array
   const [filter, setFilter] = useState('');
 
-  const handlerSave = (newItem: Item) => {
+  const handlerSave = (
+    newDescription: string,
+    newValue: number,
+    newType: string
+  ) => {
+    let newItem: Item = {
+      description: newDescription,
+      value: newValue,
+      type: newType,
+      id: itens.length + 1,
+    };
     setItens([...itens, newItem]);
   };
 
   const handlerFilter = (newFilter: string) => {
     setFilter(newFilter);
+  };
+
+  const filteredList = (): Item[] => {
+    if (filter == 'receita') {
+      return itens.filter(item => {
+        return item.type == 'receita';
+      });
+    } else if (filter == 'despesa') {
+      return itens.filter(item => {
+        return item.type == 'despesa';
+      });
+    } else {
+      return itens;
+    }
   };
 
   return (
@@ -49,7 +73,7 @@ function App() {
               <div className="basis-2/4 font-semibold">Descrição</div>
             </div>
 
-            <Lista></Lista>
+            <Lista list={filteredList()}></Lista>
           </div>
         </div>
       </div>
